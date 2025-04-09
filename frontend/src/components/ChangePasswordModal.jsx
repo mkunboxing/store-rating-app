@@ -24,6 +24,7 @@ function ChangePasswordModal({ isOpen, onClose }) {
       confirmPassword: ''
     }
   });
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   const onSubmit = async (data) => {
     if (data.newPassword !== data.confirmPassword) {
@@ -31,10 +32,11 @@ function ChangePasswordModal({ isOpen, onClose }) {
       return;
     }
 
+
     setIsLoading(true);
     try {
       await axios.put(
-        'http://localhost:8003/api/auth/change-password',
+        `${backendURL}/auth/change-password`,
         {
           currentPassword: data.currentPassword,
           newPassword: data.newPassword

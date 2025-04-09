@@ -22,12 +22,14 @@ function LoginForm() {
     }
   });
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   const onSubmit = async (data) => {
     setIsLoading(true);
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8003/api/auth/login', {
+      const response = await axios.post(`${backendURL}/auth/login`, {
         email: data.email,
         password: data.password
       });

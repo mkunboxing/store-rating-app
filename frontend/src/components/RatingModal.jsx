@@ -9,6 +9,8 @@ export default function RatingModal({ isOpen, onClose, storeId, onRatingSuccess 
   const [error, setError] = useState('');
   const { currentUser } = useAuth();
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   const handleRatingClick = async (selectedRating) => {
     try {
       setSubmitting(true);
@@ -19,8 +21,9 @@ export default function RatingModal({ isOpen, onClose, storeId, onRatingSuccess 
           Authorization: `Bearer ${currentUser.token}`
         }
       };
+
       
-      await axios.post(`http://localhost:8003/api/ratings/${storeId}`, {
+      await axios.post(`${backendURL}/ratings/${storeId}`, {
         rating: selectedRating
       }, config);
       

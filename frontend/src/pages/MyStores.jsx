@@ -68,6 +68,8 @@ export default function MyStores() {
   const [selectedStoreRatings, setSelectedStoreRatings] = useState([]);
   const [isRatingsModalOpen, setIsRatingsModalOpen] = useState(false);
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     const fetchStores = async () => {
       try {
@@ -78,7 +80,7 @@ export default function MyStores() {
           }
         };
         
-        const response = await axios.get('http://localhost:8003/api/stores/my-stores', config);
+        const response = await axios.get(`${backendURL}/stores/my-stores`, config);
         setStores(response.data);
       } catch (err) {
         setError(err.message || 'Failed to fetch stores');
@@ -101,7 +103,7 @@ export default function MyStores() {
         }
       };
       
-      const response = await axios.get(`http://localhost:8003/api/ratings/store/${storeId}`, config);
+      const response = await axios.get(`${backendURL}/ratings/store/${storeId}`, config);
       setSelectedStoreRatings(response.data);
       setIsRatingsModalOpen(true);
     } catch (err) {

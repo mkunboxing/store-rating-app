@@ -28,9 +28,11 @@ export default function Dashboard() {
     fetchStores();
   }, [currentUser]);
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   const fetchDashboardStats = async () => {
     try {
-      const response = await axios.get('http://localhost:8003/api/users/stats/dashboard', {
+      const response = await axios.get(`${backendURL}/users/stats/dashboard`, {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }
@@ -44,7 +46,7 @@ export default function Dashboard() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:8003/api/users', {
+      const response = await axios.get(`${backendURL}/users`, {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }
@@ -58,7 +60,7 @@ export default function Dashboard() {
 
   const fetchStores = async () => {
     try {
-      const response = await axios.get('http://localhost:8003/api/stores', {
+      const response = await axios.get(`${backendURL}/stores`, {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }

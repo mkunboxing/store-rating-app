@@ -19,11 +19,13 @@ export const AuthProvider = ({ children }) => {
     }
     setLoading(false);
   }, []);
+  
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
 
   // Register a new user
   const signup = async (name, email, address, password) => {
     try {
-      const response = await axios.post('http://localhost:8003/api/auth/register', {
+      const response = await axios.post(`${backendURL}/auth/register`, {
         name,
         email,
         address,
@@ -47,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   // Login an existing user
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:8003/api/auth/login', {
+      const response = await axios.post(`${backendURL}/auth/login`, {
         email,
         password
       });

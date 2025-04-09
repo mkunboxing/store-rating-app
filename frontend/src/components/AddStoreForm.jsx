@@ -30,9 +30,11 @@ function AddStoreForm({ onStoreAdded, onClose, isOpen }) {
     }
   }, [isOpen, currentUser]);
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   const fetchStoreOwners = async () => {
     try {
-      const response = await axios.get('http://localhost:8003/api/users/store-owners', {
+      const response = await axios.get(`${backendURL}/users/store-owners`, {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }
@@ -47,7 +49,7 @@ function AddStoreForm({ onStoreAdded, onClose, isOpen }) {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:8003/api/stores', data, {
+      const response = await axios.post(`${backendURL}/stores`, data, {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }

@@ -58,6 +58,8 @@ export default function Home() {
   // Toast notification state
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     const fetchStores = async () => {
       try {
@@ -72,7 +74,7 @@ export default function Home() {
           config.headers.Authorization = `Bearer ${currentUser.token}`;
         }
         
-        const response = await axios.get('http://localhost:8003/api/stores', config);
+        const response = await axios.get(`${backendURL}/stores`, config);
         setStores(response.data.data);
         setFilteredStores(response.data.data);
       } catch (err) {

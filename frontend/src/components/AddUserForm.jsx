@@ -24,10 +24,12 @@ function AddUserForm({ onUserAdded, onClose, isOpen }) {
     }
   });
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:8003/api/users', data, {
+      const response = await axios.post(`${backendURL}/users`, data, {
         headers: {
           Authorization: `Bearer ${currentUser.token}`
         }
